@@ -1,0 +1,41 @@
+﻿@model WebDemo.Models.JapaneseWordEntry
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+   @{
+    <link href="@Url.Content("~/Content/Test.css")" rel="stylesheet" type="text/css" />
+
+}
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Edit", "Test", "Post"))
+        {
+        @Html.Hidden(@Model.EntryID.ToString())
+        <br>
+        @Html.Label("Hiragana", new { @class = "Forms_Column1" })
+        @Html.EditorFor(model => model.Hiragana, new { @class = "Forms_Column1" })
+        <br>
+        @Html.Label("Kanji")
+        @Html.EditorFor(model => model.Kanji)
+        <br>
+        @Html.Label("Additional Text")
+        @Html.TextArea("Additional Information: ", @Model.AdditionalText)
+        <br>
+        @Html.Label("Language")
+        @Html.EditorFor(model => model.MotherTongueTranslationLabel)
+        <br>
+        @Html.Label("Translation")
+        @Html.EditorFor(model => model.MotherTongueTranslation)
+        }
+    </div>
+</body>
+</html>

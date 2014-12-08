@@ -1,0 +1,32 @@
+﻿using System;
+using WebDemo.Models;
+using WebDemo.CustumExtensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+
+namespace WebDemoTest
+{
+    [TestClass]
+    public class JapaneseWordsTest
+    {
+        private const string NOTNULLOREMPTY = "not null or empty ";
+
+        /// <summary>
+        /// When creating a new entry ,the model needs to be instanciated and requires some fields to not be null or else
+        /// the view will complain of null reference. This is also testing the (first) constructor.
+        /// </summary>
+        [TestMethod]
+        public void EmptyModel_ConstructorDefault()
+        {
+            JapaneseWord jpw = new JapaneseWord();
+            Assert.AreEqual(0,jpw.EntryID,"Entry ID" +NOTNULLOREMPTY);
+            Assert.AreEqual("",jpw.Hiragana, "Hiragana "+NOTNULLOREMPTY );
+            Assert.AreEqual("", jpw.Kanji, "Kanji "+NOTNULLOREMPTY);
+            Assert.AreEqual("", jpw.Romaji, "Romaji "+NOTNULLOREMPTY);
+            Assert.AreEqual("", jpw.AdditionalText, "Additional Text "+ NOTNULLOREMPTY);
+            Assert.AreEqual("",jpw.MotherTongueTranslation,"Mother Tongue Translation "+ NOTNULLOREMPTY);
+            Assert.AreEqual("",jpw.MotherTongueTranslationLabel,"Mother Tongue Translation Label"+NOTNULLOREMPTY);
+
+        }
+    }
+}

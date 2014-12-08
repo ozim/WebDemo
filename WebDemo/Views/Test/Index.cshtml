@@ -1,0 +1,29 @@
+﻿@model WebDemo.Models.JapaneseWord
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        @Html.Hidden( @Model.EntryID.ToString() )
+        <br>
+        @Html.Label( @Model.Hiragana) 
+        <br>
+        @Html.Label(@Model.Romaji )
+        <br>
+        @Html.Label(@Model.AdditionalText )
+        <br>
+        @Html.Label(@Model.MotherTongueTranslationLabel) 
+        <br>
+        @Html.Label(@Model.MotherTongueTranslation)
+    </div>
+</body>
+</html>
