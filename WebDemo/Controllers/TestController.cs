@@ -45,5 +45,10 @@ namespace WebDemo.Controllers
         {
             return View();
         }
+
+        public ActionResult GetAll() 
+        {
+            return View();
+        }
     }
 }

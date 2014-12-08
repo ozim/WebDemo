@@ -10,9 +10,7 @@ namespace WebDemo.DataAccessLayer
 {
     public class JapaneseWordContext:DbContext
     {
-        public JapaneseWordContext() : base("JapaneseWordContext") 
-        {
-            public DbSet<JapaneseWord>JapaneseWords {get;set;}
-        }
+       
+       
     }
 }

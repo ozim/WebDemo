@@ -1,17 +1,23 @@
-﻿
-@{
-    ViewBag.Title = "My Japanese Dictionary";
-}
+﻿@model IEnumerable<WebDemo.Models.JapaneseWord>
+    @{
+        ViewBag.Title = "My Japanese Dictionary";
+    }
 
-<h2>Dictionary Lists</h2>
+    <h2>Dictionary Lists</h2>
 
-<span>
-    <button>
-        Add to Dictionary
-    </button>
-</span>
+    <span>
+        <button>
+            Add to Dictionary
+        </button>
+    </span>
 
-<div id="Dictionary_Content">
-    bla
-</div>
+    <div id="Dictionary_Content">
+      @if(Model.Count()>0)
+      {
+    @Html.Partial( "WordList", Model)
+      }else
+      {
+          @: List does not exist
+      }
+    </div>
 

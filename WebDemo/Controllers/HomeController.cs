@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebDemo.Repository;
 
 namespace WebDemo.Controllers
 {
@@ -20,7 +21,10 @@ namespace WebDemo.Controllers
         /// <returns></returns>
         public ActionResult DictionaryLists() 
         {
-            return View();
+            JapaneseWordRepository jprep = new JapaneseWordRepository();
+            var modellist = jprep.GetAllEntries();
+
+            return View(modellist);
         }
 
         public ActionResult About()
