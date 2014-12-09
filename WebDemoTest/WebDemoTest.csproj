@@ -50,12 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controller\HomeControllerTest.cs" />
     <Compile Include="Model\JapaneseWordTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\WebDemo\WebDemo.csproj">
       <Project>{62711ca3-d26a-4533-858d-96d5aed20bdb}</Project>

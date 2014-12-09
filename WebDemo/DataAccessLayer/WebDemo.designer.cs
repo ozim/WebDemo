@@ -80,7 +80,7 @@ namespace WebDemo.DataAccessLayer
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _EntryId;
+		private System.Nullable<long> _EntryId;
 		
 		private string _Hiragana;
 		
@@ -98,7 +98,7 @@ namespace WebDemo.DataAccessLayer
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnEntryIdChanging(int value);
+    partial void OnEntryIdChanging(System.Nullable<long> value);
     partial void OnEntryIdChanged();
     partial void OnHiraganaChanging(string value);
     partial void OnHiraganaChanged();
@@ -119,8 +119,8 @@ namespace WebDemo.DataAccessLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int EntryId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryId", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public System.Nullable<long> EntryId
 		{
 			get
 			{

@@ -42,7 +42,7 @@ namespace WebDemo.Repository
                 query = (from jwords in context.JapaneseWordEntries
                          select new JapaneseWord
                          {
-                             EntryID = jwords.EntryId,
+                             EntryID =Convert.ToInt32( jwords.EntryId),
                              Hiragana = jwords.Hiragana,
                              Romaji = jwords.Romaji,
                              AdditionalText = jwords.AdditionalText,
@@ -64,32 +64,27 @@ namespace WebDemo.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<JapaneseWord> GetEntry(int id) 
+        public JapaneseWord GetEntry(int id) 
         {
 
-            List<JapaneseWord> query = new List<JapaneseWord>();
+            JapaneseWord emptyModel = new JapaneseWord ();
 
             try
             {
-                query = (from jwords in context.JapaneseWordEntries
-                         where jwords.EntryId.Equals(id)
-                         select new JapaneseWord
-                         {
-                             EntryID = jwords.EntryId,
-                             Hiragana = jwords.Hiragana,
-                             Romaji = jwords.Romaji,
-                             AdditionalText = jwords.AdditionalText,
-                             Kanji = jwords.Kanji,
-                             MotherTongueTranslation = jwords.MotherTongueTranslation,
-                             MotherTongueTranslationLabel = jwords.MotherTongueTranslationLabel
-                         }).ToList();
+               
+                var query = (from entry in context.JapaneseWordEntries
+                            where entry.EntryId == id
+                            select entry).FirstOrDefault();
+                JapaneseWord model = new JapaneseWord(query);
+
+                return model;
             }
             catch (Exception ex)
             {
                 appLog.WriteEntry(ex.Message);
             }
 
-            return query;
+            return emptyModel;
         }
 
         /// <summary>
@@ -98,6 +93,7 @@ namespace WebDemo.Repository
         /// <param name="id"></param>
         public void DeleteEntry(int id)
         {
+            try { 
             var jpword = (from words in context.JapaneseWordEntries
                                   where words.EntryId.Equals(id)
                                   select words).Single();
@@ -105,33 +101,73 @@ namespace WebDemo.Repository
             context.JapaneseWordEntries.DeleteOnSubmit(jpword);
             context.SubmitChanges();
         }
+            catch(Exception ex)
+            {
+                appLog.WriteEntry(ex.Message);
+            }
+        }
 
         /// <summary>
         /// Add 1 entry to the table
         /// </summary>
         public void AddEntry(JapaneseWord model) 
         {
-            JapaneseWordEntry jpwe = new JapaneseWordEntry
+            try
             {
-                Hiragana = model.Hiragana,
-                Kanji = model.Kanji,
-                AdditionalText = model.AdditionalText,
-                MotherTongueTranslation = model.MotherTongueTranslation,
-                MotherTongueTranslationLabel = model.MotherTongueTranslationLabel
-            };
+                JapaneseWordEntry jpwe = new JapaneseWordEntry
+                {
+                    Hiragana = model.Hiragana,
+                    Kanji = model.Kanji,
+                    Romaji = model.Romaji,
+                    AdditionalText = model.AdditionalText,
+                    MotherTongueTranslation = model.MotherTongueTranslation,
+                    MotherTongueTranslationLabel = model.MotherTongueTranslationLabel
+                };
+                jpwe.EntryId = null; // since this is an insert, id's are auto incremented on the database side
+                context.JapaneseWordEntries.InsertOnSubmit(jpwe);
 
-            context.JapaneseWordEntries.InsertOnSubmit(jpwe);
-
-            context.SubmitChanges();
+                context.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                appLog.WriteEntry(ex.Message);
+            }
 
         }
 
         /// <summary>
-        /// edit entry
+        /// Edit entry
+        /// Retrieve model from database, overwrite the properties if the query if found
         /// </summary>
-        public void EditEntry(int id) 
+        public void EditEntry(JapaneseWord model) 
         {
+            try
+            {
+                var query = (from entry in context.JapaneseWordEntries
+                            where entry.EntryId == model.EntryID
+                            select entry).FirstOrDefault();
+                if (query != null)
+                {
 
+                    query.Romaji = model.Romaji;
+                    query.Hiragana = model.Hiragana;
+                    query.Kanji = model.Kanji;
+                    query.AdditionalText = model.AdditionalText;
+                    query.MotherTongueTranslation = model.MotherTongueTranslation;
+                    query.MotherTongueTranslationLabel = model.MotherTongueTranslationLabel;
+
+                    context.SubmitChanges();
+                }
+                else 
+                {
+                    throw new NullReferenceException("Entry model is null");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                appLog.WriteEntry(ex.Message);
+            }
 
         }
         

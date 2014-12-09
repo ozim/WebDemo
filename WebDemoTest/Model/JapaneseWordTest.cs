@@ -2,6 +2,7 @@
 using WebDemo.Models;
 using WebDemo.CustumExtensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WebDemo.DataAccessLayer;
 
 
 namespace WebDemoTest
@@ -26,6 +27,17 @@ namespace WebDemoTest
             Assert.AreEqual("", jpw.AdditionalText, "Additional Text "+ NOTNULLOREMPTY);
             Assert.AreEqual("",jpw.MotherTongueTranslation,"Mother Tongue Translation "+ NOTNULLOREMPTY);
             Assert.AreEqual("",jpw.MotherTongueTranslationLabel,"Mother Tongue Translation Label"+NOTNULLOREMPTY);
+
+        }
+
+        /// <summary>
+        /// Testing second constructor, but the data comes from the database?
+        /// </summary>
+        [TestMethod]
+        public void EditModel_SecondConstructor() 
+        {
+            JapaneseWord jpw = new JapaneseWord();
+            JapaneseWordEntry jpwe = new JapaneseWordEntry();
 
         }
     }

@@ -2,7 +2,7 @@
   <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\WebDemo.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WebDemoConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.JapaneseWordEntry" Member="JapaneseWordEntries">
     <Type Name="JapaneseWordEntry">
-      <Column Name="EntryId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EntryId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="true" />
       <Column Name="Hiragana" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Romaji" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Kanji" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />

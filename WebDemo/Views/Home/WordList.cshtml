@@ -1,123 +1,87 @@
 ﻿@model IEnumerable<WebDemo.Models.JapaneseWord>
 <p>
-    @Html.ActionLink("Create New", "Create")
+
 </p>
-
-   @foreach (var item in Model) 
-   {
-       <p>
-       <!-- The WORD! -->
-       <span class="symbol_word_phrase">
-               Word/Symbol/Phrase
-           <span class="symbol_word_phrase_content">
-               @Html.DisplayFor(modelItem => item.Kanji)
-           </span>
-       </span>
-       </p>
-       <!-- Related details -->
-       <!-- Headers -->
-       <p>
-           <span class="dictionary_headers">
-               @Html.DisplayNameFor(model => model.Hiragana)
-               @Html.DisplayNameFor(model => model.Romaji)
-               @Html.DisplayNameFor(model => model.MotherTongueTranslationLabel)
-               @Html.DisplayNameFor(model => model.MotherTongueTranslation)
-           </span>
-       </p>
-       <!--Content-->
-       <p>
-           <span class="dictionary_content">
-               @Html.DisplayFor(model => model.Hiragana)
-               @Html.DisplayFor(model => model.Romaji)
-               @Html.DisplayFor(model => model.MotherTongueTranslationLabel)
-               @Html.DisplayFor(model => model.MotherTongueTranslation)
-           </span>
-       </p>
-      <!-- text area -->
-       <p>
-           <span class="dictionary_headers">
-               @Html.DisplayNameFor(model => model.AdditionalText)
-           </span>
-           <br />
-           <span class="dictionary_text_area">
-               @Html.DisplayFor(modelItem => item.AdditionalText)
-           </span>
-       </p>
-       <!-- editing possibilities-->
-       <span>
-           @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-           @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-           @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-       </span>
+<br />
 
 
+@foreach (var item in Model)
+{
 
-   }
-    
-    <!--
-    <table class="table">
-
-    <tr>
-
-        <th>
-            Word/Symbol/Phrase
-        </th>
-    </tr>
-    <tr>
-        @foreach (var item in Model)
-        {
-
-        }
-    </tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Hiragana)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Romaji)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AdditionalText)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MotherTongueTranslation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MotherTongueTranslationLabel)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-
-            <td>
+    <div class="dictionary_entries">
+        <br />
+        <p>
+            <!-- The WORD! -->
+            <span class="symbol_word_phrase">
+                Word/Symbol/Phrase
+            </span>
+            <span class="symbol_word_phrase_content">
+                <br />
                 @Html.DisplayFor(modelItem => item.Kanji)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hiragana)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Romaji)
-            </td>
-            <td>
+            </span>
+        </p>
+        <!-- Related details -->
+        <!-- Headers -->
+        <p>
+            <table>
+                <tr>
+                    <td>
+                        <span class="dictionary_headers">
+                            @Html.DisplayNameFor(model => model.Hiragana)
+                        </span>
+                    </td>
+                    <td>
+                        <span class="dictionary_headers">
+                            @Html.DisplayNameFor(model => model.Romaji)
+                        </span>
+                    </td>
+                    <td>
+                        <span class="dictionary_headers">
+                            Mother Tongue
+                        </span>
+                    </td>
+                    <td>
+                        <span class="dictionary_headers">
+                            Mother Tongue Translation
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="dictionary_content">  @Html.DisplayFor(model => item.Hiragana) </span>
+                    </td>
+                    <td>
+                        <span class="dictionary_content">   @Html.DisplayFor(model => item.Romaji)  </span>
+                    </td>
+                    <td>
+                        <span class="dictionary_content">    @Html.DisplayFor(model => item.MotherTongueTranslationLabel)  </span>
+                    </td>
+                    <td>
+                        <span class="dictionary_content">  @Html.DisplayFor(model => item.MotherTongueTranslation)  </span>
+                    </td>
+                </tr>
+            </table>
+        </p>
+        <!--Content-->
+
+        <br />
+        <!-- text area -->
+        <p>
+            <span class="dictionary_headers">
+                @Html.DisplayNameFor(model => model.AdditionalText)
+            </span>
+            <br />
+            <span class="dictionary_text_area">
                 @Html.DisplayFor(modelItem => item.AdditionalText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MotherTongueTranslation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MotherTongueTranslationLabel)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
+            </span>
+        </p>
+        <!-- editing possibilities-->
+        <span>
+            @Html.ActionLink("Edit", "Edit","MyDictionary", new {  id=item.EntryID } ,null) |
+            @Html.ActionLink("Delete", "Delete", "MyDictionary", new { id = item.EntryID},null)
+        </span>
 
-</table>
+        <br />
+    </div>
+}
 
-        -->
